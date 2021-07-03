@@ -1,0 +1,49 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'store/css/cart.css' %}"> -->
+
+<body>
+    {% block content %}
+        <div class="cart-rows">
+            <div class="checkout-box">
+                <div class="product checkout">
+                    <a class="btn btn-outline-dark" style="margin: 10px 0px 0px 20px;" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+                    <br>
+                    <br>
+                    <table class="table">
+                        <tr>
+                            <th><h4>Items: <strong>{{ order.get_cart_items }}</strong></h3></th>
+                            <th><h4>Total: <strong>${{ order.get_cart_total|floatformat:2 }}</strong></h3></th>
+                            <th>
+                                <a style="float: right; position: relative; right: 10px;" href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                
+                <br>
+                <div class="product checkout">
+                    <table class="checkout-table">
+                        <tr>
+                            <th><strong></strong></th>
+                            <th><strong>Item</strong></th>
+                            <th><strong>Price</strong></th>
+                            <th><strong>Quantity</strong></th>
+                            <th><strong>Total</strong></th>
+                        </tr>
+                        {% for item in items %}
+                            <tr>
+                                <td style="height: 70px;"><img style="width: 75px; height: 50px;" src="{{ item.product.imageURL }}" alt="error"></td>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.product.price }}</td>
+                                <td>{{ item.quantity }}<a href="#"><img class="update-cart" data-action='add' data-product = {{ item.product.id }} style="width: 10px; height: 10px;" src="{% static 'store/img/arrow-up.png' %}" alt="er"></a> <a href="#"><img class="update-cart" data-action='remove' data-product = {{ item.product.id }} src="{% static 'store/img/arrow-down.png' %}" style="width: 10px; height: 10px;" alt="er"></a></td>
+                                <td> ${{item.get_total|floatformat:2 }} </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+        
+            </div>
+        </div>
+    {% endblock content %}
+</body>

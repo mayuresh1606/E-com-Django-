@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" href="{% static 'store/css/store.css' %}"> -->
+
+<body>
+    {% block content %}
+        <div class="rows">
+            {% for product in products %}    
+                <div class="product product-details">
+                    <div class="product-box">
+                        <img src="{{ product.imageURL }}" alt="error">
+                        <hr>
+                    </div>
+                    <div class="info-box">
+                        <h6><strong>{{ product.name }}</strong></h6>
+                        <button class="btn btn-outline-secondary add-btn update-cart" data-product="{{ product.id }}" data-action="add">Add to cart</button>
+                        <button class="btn btn-outline-success">View</button>
+                        <p class="price" style="display: inline; position: relative; right: 20px; float: right;">${{ product.price }}</p>
+                    </div>
+                </div>
+            {% endfor %}     
+        </div>
+    {% endblock content %}
+    
+</body>
